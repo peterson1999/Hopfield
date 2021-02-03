@@ -34,6 +34,8 @@ namespace HNN.Properties
         {
         }
 
+        public static object ImageDimension { get; internal set; }
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
