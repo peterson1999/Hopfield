@@ -17,6 +17,7 @@ namespace HNN
         private int imageDim = 10;
         private Image distImg;
         private Bitmap current;
+        private List<List<Neuron>> patternList = new List<List<Neuron>>();
         public Form1()
         {
             InitializeComponent();
@@ -33,22 +34,11 @@ namespace HNN
             StoredImgPanel.Controls.Clear();
             NN.EnergyChanged += new EnergyChangedHandler(NN_EnergyChanged);
             current = new Bitmap(imageDim, imageDim);
-            /*Random rnd = new Random();
-            int r = 0;
-            imNNState.pixels = new int[imageDim, imageDim];
-            for (int i = 0; i<imageDim; i++)
-                for (int j = 0; j<imageDim; j++)
-                {
-                    r = rnd.Next(2);
-                    if (r == 0) imNNState.pixels[i, j] = Color.Black.ToArgb();
-                    else if (r == 1) imNNState.pixels[i, j] = Color.White.ToArgb();                    
-                }*/
             distImg = null;
             AddPatternBtn.Enabled = true;
             SelectPictureBtn.Enabled = false;
             RunDynamicsBtn.Enabled = false;
-            /*imNNState.Visible = true;
-            imNNState.Invalidate();*/
+          
             UpdatePropertiesPB();
         }
 
@@ -57,10 +47,7 @@ namespace HNN
             lblEnergy.Text = e.Energy.ToString();
             int i = (int)e.NeuronIndex / imageDim;
             int j = e.NeuronIndex % imageDim;
-            /*if (imNNState.pixels[i, j] == Color.White.ToArgb()) imNNState.pixels[i, j] = Color.Black.ToArgb();
-            else if (imNNState.pixels[i, j] == Color.Black.ToArgb()) imNNState.pixels[i, j] = Color.White.ToArgb();
-            imNNState.Invalidate();*/
-            currentState.Image = current;
+          
             Application.DoEvents();
             System.Threading.Thread.Sleep(100);
         }
@@ -100,7 +87,9 @@ namespace HNN
                             }
                             pattern.Add(n);
                         }
+                    patternList.Add(pattern);
                     NN.AddPattern(pattern);
+                    
                     PictureBox img = new PictureBox();
                     img.Image = new Bitmap(imgPattern);
                     StoredImgPanel.Controls.Add(img);
@@ -110,7 +99,25 @@ namespace HNN
             }            
         }
 
-        
+        private int NearestPattern(List<Neuron> inState)
+        {
+            int maxCount = 0, count = 0, pat = 0;
+            for (int i = 0; i < patternList.Count; i++)
+            {
+                count = 0;
+                for (int j = 0; j < 100; j++)
+                {
+                    if (inState[j].State == patternList[i][j].State)
+                        count++;
+                }
+                if (count > maxCount)
+                {
+                    maxCount = count;
+                    pat = i;
+                }
+            }
+            return pat;
+        }
         
         private void RunDynamicsBut_Click(object sender, EventArgs e)
         {
@@ -136,6 +143,30 @@ namespace HNN
                 }
             NN.Run(initialState);
             lblEnergy.Text = NN.Energy.ToString();
+           
+            int nearest = NearestPattern(initialState);
+            Console.WriteLine(nearest);
+            int k = 0;
+            Bitmap nPattern = new Bitmap(imageDim, imageDim);
+            for (int i = 0; i < imageDim; i++)
+                for (int j = 0; j < imageDim; j++)
+                {
+                    if (patternList[nearest][k++].State == -1)
+                        nPattern.SetPixel(i, j, Color.Black);
+                    else
+                        nPattern.SetPixel(i, j, Color.White);
+                }
+
+            k = 0;
+            for (int i = 0; i < imageDim; i++)
+                for (int j = 0; j < imageDim; j++)
+                {
+                    if (initialState[k++].State == -1)
+                        current.SetPixel(i, j, Color.Black);
+                    else
+                        current.SetPixel(i, j, Color.White);
+                }
+            nearPat.Image = nPattern;
             currentState.Image = current;
         }
 
