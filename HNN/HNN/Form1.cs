@@ -143,7 +143,13 @@ namespace HNN
                     NN.AddPattern(pattern);
 
                     PictureBox img = new PictureBox();
+                    Padding myMargin = new Padding();
+                    myMargin.All = 10;
                     img.Image = new Bitmap(imgPattern);
+                    img.Width = 100;
+                    img.Height = 80;
+                    img.Margin = myMargin;
+                    img.SizeMode = PictureBoxSizeMode.StretchImage;
                     StoredImgPanel.Controls.Add(img);
                     SelectPictureBtn.Enabled = true;
                     UpdatePropertiesPB();
