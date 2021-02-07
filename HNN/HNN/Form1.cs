@@ -18,6 +18,7 @@ namespace HNN
         private Image distImg;
         private Bitmap current;
         private List<List<Neuron>> patternList = new List<List<Neuron>>();
+        private List<string> classifier = new List<string>();
         public Form1()
         {
             InitializeComponent();
@@ -35,9 +36,13 @@ namespace HNN
             NN.EnergyChanged += new EnergyChangedHandler(NN_EnergyChanged);
             current = new Bitmap(imageDim, imageDim);
             distImg = null;
-            AddPatternBtn.Enabled = true;
+            AddChinese.Enabled = true;
+            AddJapanese.Enabled = true;
+            AddKorean.Enabled = true;
             SelectPictureBtn.Enabled = false;
             RunDynamicsBtn.Enabled = false;
+            patternList.Clear();
+            classifier.Clear();
           
             UpdatePropertiesPB();
         }
@@ -52,7 +57,54 @@ namespace HNN
             System.Threading.Thread.Sleep(100);
         }
 
-        private void AddPatternBut_Click(object sender, EventArgs e)
+        //private void AddPatternBut_Click(object sender, EventArgs e)
+        //{
+        //    Image imgPattern;
+        //    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+        //    {
+        //        imgPattern = Image.FromFile(openFileDialog1.FileName);
+        //        if (imgPattern.Width != imageDim || imgPattern.Height != imageDim)
+        //        {
+        //            MessageBox.Show("Image size must be " + imageDim.ToString() + "x" + imageDim.ToString() + " pixels", "Wrong image size", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //        else
+        //        {                    
+        //            int[,] patternPixels;
+        //            int p = 0;
+        //            int midColor = Math.Abs((int)(Color.Black.ToArgb() / 2));
+        //            Bitmap b = new Bitmap(imgPattern);
+        //            patternPixels = new int[imageDim, imageDim];
+        //            List<Neuron> pattern = new List<Neuron>(imageDim * imageDim);
+        //            for (int i = 0; i<imageDim; i++)
+        //                for (int j = 0; j<imageDim; j++)
+        //                {
+        //                    Neuron n = new Neuron();
+        //                    p = Math.Abs(b.GetPixel(i, j).ToArgb());
+        //                    if (p<midColor)
+        //                    {
+        //                        b.SetPixel(i, j, Color.White);
+        //                        n.State = NeuronStates.AlongField;
+        //                    }
+        //                    else
+        //                    {
+        //                        b.SetPixel(i, j, Color.Black);
+        //                        n.State = NeuronStates.AgainstField;
+        //                    }
+        //                    pattern.Add(n);
+        //                }
+        //            patternList.Add(pattern);
+        //            NN.AddPattern(pattern);
+                    
+        //            PictureBox img = new PictureBox();
+        //            img.Image = new Bitmap(imgPattern);
+        //            StoredImgPanel.Controls.Add(img);
+        //            SelectPictureBtn.Enabled = true;
+        //            UpdatePropertiesPB();
+        //        }                
+        //    }            
+        //}
+
+        private void AddPattern()
         {
             Image imgPattern;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -63,19 +115,19 @@ namespace HNN
                     MessageBox.Show("Image size must be " + imageDim.ToString() + "x" + imageDim.ToString() + " pixels", "Wrong image size", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
-                {                    
+                {
                     int[,] patternPixels;
                     int p = 0;
                     int midColor = Math.Abs((int)(Color.Black.ToArgb() / 2));
                     Bitmap b = new Bitmap(imgPattern);
                     patternPixels = new int[imageDim, imageDim];
                     List<Neuron> pattern = new List<Neuron>(imageDim * imageDim);
-                    for (int i = 0; i<imageDim; i++)
-                        for (int j = 0; j<imageDim; j++)
+                    for (int i = 0; i < imageDim; i++)
+                        for (int j = 0; j < imageDim; j++)
                         {
                             Neuron n = new Neuron();
                             p = Math.Abs(b.GetPixel(i, j).ToArgb());
-                            if (p<midColor)
+                            if (p < midColor)
                             {
                                 b.SetPixel(i, j, Color.White);
                                 n.State = NeuronStates.AlongField;
@@ -89,14 +141,14 @@ namespace HNN
                         }
                     patternList.Add(pattern);
                     NN.AddPattern(pattern);
-                    
+
                     PictureBox img = new PictureBox();
                     img.Image = new Bitmap(imgPattern);
                     StoredImgPanel.Controls.Add(img);
                     SelectPictureBtn.Enabled = true;
                     UpdatePropertiesPB();
-                }                
-            }            
+                }
+            }
         }
 
         private int NearestPattern(List<Neuron> inState)
@@ -105,7 +157,7 @@ namespace HNN
             for (int i = 0; i < patternList.Count; i++)
             {
                 count = 0;
-                for (int j = 0; j < 100; j++)
+                for (int j = 0; j < (imageDim*imageDim); j++)
                 {
                     if (inState[j].State == patternList[i][j].State)
                         count++;
@@ -166,6 +218,7 @@ namespace HNN
                     else
                         current.SetPixel(i, j, Color.White);
                 }
+            label4.Text = "This looks like the " + classifier[nearest] + " word:";
             nearPat.Image = nPattern;
             currentState.Image = current;
         }
@@ -189,5 +242,36 @@ namespace HNN
             distImg = Image.FromFile(openFileDialog2.FileName);
             distortedImg.Image = distImg;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddJapanese_Click(object sender, EventArgs e)
+        {
+            classifier.Add("Japanese");
+            AddPattern();
+
+        }
+
+        private void AddChinese_Click(object sender, EventArgs e)
+        {
+            classifier.Add("Chinese");
+            AddPattern();
+        }
+
+        private void AddKorean_Click(object sender, EventArgs e)
+        {
+            classifier.Add("Korean");
+            AddPattern();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
