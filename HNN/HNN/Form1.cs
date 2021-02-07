@@ -19,6 +19,8 @@ namespace HNN
         private Bitmap current;
         private List<List<Neuron>> patternList = new List<List<Neuron>>();
         private List<string> classifier = new List<string>();
+        private int scanLineLoc = 0;
+        private bool scanLineDir = true, startScanAnim = false;
         public Form1()
         {
             InitializeComponent();
@@ -29,13 +31,20 @@ namespace HNN
             lblNumberOfPatterns.Text = NN.M.ToString();
             lblEnergy.Text = NN.Energy.ToString();
         }
-        private void CreateNNBut_Click(object sender, EventArgs e)
+        private void CreateNNBtn_Click(object sender, EventArgs e)
         {
             NN = new NeuralNetwork(imageDim* imageDim);
             StoredImgPanel.Controls.Clear();
             NN.EnergyChanged += new EnergyChangedHandler(NN_EnergyChanged);
             current = new Bitmap(imageDim, imageDim);
             distImg = null;
+            distortedImg.Image = currentState.BackgroundImage = currentState.Image = nearPat.Image = null;
+            label4.Text = "";
+
+            scanLineLoc = 0;
+            scanLineDir = true;
+            startScanAnim = false;
+
             AddChinese.Enabled = true;
             AddJapanese.Enabled = true;
             AddKorean.Enabled = true;
@@ -52,57 +61,17 @@ namespace HNN
             lblEnergy.Text = e.Energy.ToString();
             int i = (int)e.NeuronIndex / imageDim;
             int j = e.NeuronIndex % imageDim;
-          
+            if (current.GetPixel(i, j).ToArgb() == Color.White.ToArgb())
+                current.SetPixel(i, j, Color.Black);
+            else if (current.GetPixel(i, j).ToArgb() == Color.Black.ToArgb())
+                current.SetPixel(i, j, Color.White);
+
+            currentState.BackgroundImage = current;
+            currentState.Invalidate();
+            currentState.Refresh();
             Application.DoEvents();
             System.Threading.Thread.Sleep(100);
         }
-
-        //private void AddPatternBut_Click(object sender, EventArgs e)
-        //{
-        //    Image imgPattern;
-        //    if (openFileDialog1.ShowDialog() == DialogResult.OK)
-        //    {
-        //        imgPattern = Image.FromFile(openFileDialog1.FileName);
-        //        if (imgPattern.Width != imageDim || imgPattern.Height != imageDim)
-        //        {
-        //            MessageBox.Show("Image size must be " + imageDim.ToString() + "x" + imageDim.ToString() + " pixels", "Wrong image size", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //        else
-        //        {                    
-        //            int[,] patternPixels;
-        //            int p = 0;
-        //            int midColor = Math.Abs((int)(Color.Black.ToArgb() / 2));
-        //            Bitmap b = new Bitmap(imgPattern);
-        //            patternPixels = new int[imageDim, imageDim];
-        //            List<Neuron> pattern = new List<Neuron>(imageDim * imageDim);
-        //            for (int i = 0; i<imageDim; i++)
-        //                for (int j = 0; j<imageDim; j++)
-        //                {
-        //                    Neuron n = new Neuron();
-        //                    p = Math.Abs(b.GetPixel(i, j).ToArgb());
-        //                    if (p<midColor)
-        //                    {
-        //                        b.SetPixel(i, j, Color.White);
-        //                        n.State = NeuronStates.AlongField;
-        //                    }
-        //                    else
-        //                    {
-        //                        b.SetPixel(i, j, Color.Black);
-        //                        n.State = NeuronStates.AgainstField;
-        //                    }
-        //                    pattern.Add(n);
-        //                }
-        //            patternList.Add(pattern);
-        //            NN.AddPattern(pattern);
-                    
-        //            PictureBox img = new PictureBox();
-        //            img.Image = new Bitmap(imgPattern);
-        //            StoredImgPanel.Controls.Add(img);
-        //            SelectPictureBtn.Enabled = true;
-        //            UpdatePropertiesPB();
-        //        }                
-        //    }            
-        //}
 
         private void AddPattern()
         {
@@ -177,11 +146,15 @@ namespace HNN
             return pat;
         }
         
-        private void RunDynamicsBut_Click(object sender, EventArgs e)
+        private void RunDynamicsBtn_Click(object sender, EventArgs e)
         {
             Bitmap img = new Bitmap(distImg);
-            
             List<Neuron> initialState = new List<Neuron>(NN.N);
+
+            startScanAnim = true;
+            scanLineLoc = 0;
+            scanLineDir = true;
+
             for (int i = 0; i<imageDim; i++)
                 for (int j=0;j<imageDim;j++)
                 {
@@ -201,7 +174,9 @@ namespace HNN
                 }
             NN.Run(initialState);
             lblEnergy.Text = NN.Energy.ToString();
-           
+            startScanAnim = false;
+            currentState.Image = current;
+
             int nearest = NearestPattern(initialState);
             Console.WriteLine(nearest);
             int k = 0;
@@ -226,7 +201,6 @@ namespace HNN
                 }
             label4.Text = "This looks like the " + classifier[nearest] + " word:";
             nearPat.Image = nPattern;
-            currentState.Image = current;
         }
 
         private void HopfieldRecognizerMainForm_Load(object sender, EventArgs e)
@@ -249,11 +223,6 @@ namespace HNN
             distortedImg.Image = distImg;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void AddJapanese_Click(object sender, EventArgs e)
         {
             classifier.Add("Japanese");
@@ -273,11 +242,34 @@ namespace HNN
             AddPattern();
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void currentState_Paint(object sender, PaintEventArgs e)
         {
+            if (startScanAnim)
+            {
+                int increment = 10;
+                Graphics g = e.Graphics;
+                g.DrawLine(new Pen(Color.Red, 2.5f), 0, scanLineLoc, 165, scanLineLoc);
 
+                if (scanLineDir == true)
+                {
+                    scanLineLoc += increment;
+                    if (scanLineLoc >= 166)
+                    {
+                        scanLineLoc -= increment;
+                        scanLineDir = false;
+                    }
+                }
+                else
+                {
+                    scanLineLoc -= increment;
+                    if (scanLineLoc <= 0)
+                    {
+                        scanLineLoc += increment;
+                        scanLineDir = true;
+                    }
+                }
+                this.Invalidate(); 
+            }
         }
-
-        
     }
 }
