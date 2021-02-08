@@ -25,12 +25,12 @@ namespace HNN
         {
             InitializeComponent();
         }
-        private void UpdatePropertiesPB()
+        /*private void UpdatePropertiesPB()
         {
             lblNNSize.Text = NN.N.ToString();
             lblNumberOfPatterns.Text = NN.M.ToString();
             lblEnergy.Text = NN.Energy.ToString();
-        }
+        }*/
         private void CreateNNBtn_Click(object sender, EventArgs e)
         {
             NN = new NeuralNetwork(imageDim* imageDim);
@@ -53,12 +53,12 @@ namespace HNN
             patternList.Clear();
             classifier.Clear();
           
-            UpdatePropertiesPB();
+            //UpdatePropertiesPB();
         }
 
         private void NN_EnergyChanged(object sender, EnergyEventArgs e)
         {
-            lblEnergy.Text = e.Energy.ToString();
+            //lblEnergy.Text = e.Energy.ToString();
             int i = (int)e.NeuronIndex / imageDim;
             int j = e.NeuronIndex % imageDim;
             if (current.GetPixel(i, j).ToArgb() == Color.White.ToArgb())
@@ -121,7 +121,7 @@ namespace HNN
                     img.SizeMode = PictureBoxSizeMode.StretchImage;
                     StoredImgPanel.Controls.Add(img);
                     SelectPictureBtn.Enabled = true;
-                    UpdatePropertiesPB();
+                    //UpdatePropertiesPB();
                 }
             }
         }
@@ -173,7 +173,7 @@ namespace HNN
                     initialState.Add(neuron);
                 }
             NN.Run(initialState);
-            lblEnergy.Text = NN.Energy.ToString();
+            //lblEnergy.Text = NN.Energy.ToString();
             startScanAnim = false;
             currentState.Image = current;
 

@@ -30,13 +30,6 @@
         {
             this.CreateNNBtn = new System.Windows.Forms.Button();
             this.RunDynamicsBtn = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblEnergy = new System.Windows.Forms.Label();
-            this.lblNumberOfPatterns = new System.Windows.Forms.Label();
-            this.lblNNSize = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.currentState = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -52,7 +45,6 @@
             this.AddKorean = new System.Windows.Forms.Button();
             this.AddJapanese = new System.Windows.Forms.Button();
             this.AddChinese = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.currentState)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -64,111 +56,51 @@
             // 
             // CreateNNBtn
             // 
-            this.CreateNNBtn.Location = new System.Drawing.Point(12, 23);
+            this.CreateNNBtn.BackColor = System.Drawing.Color.White;
+            this.CreateNNBtn.Location = new System.Drawing.Point(13, 38);
+            this.CreateNNBtn.Margin = new System.Windows.Forms.Padding(4);
             this.CreateNNBtn.Name = "CreateNNBtn";
-            this.CreateNNBtn.Size = new System.Drawing.Size(312, 23);
+            this.CreateNNBtn.Size = new System.Drawing.Size(428, 45);
             this.CreateNNBtn.TabIndex = 0;
-            this.CreateNNBtn.Text = "Create Neural Network";
-            this.CreateNNBtn.UseVisualStyleBackColor = true;
+            this.CreateNNBtn.Text = "Create Character Set";
+            this.CreateNNBtn.UseVisualStyleBackColor = false;
             this.CreateNNBtn.Click += new System.EventHandler(this.CreateNNBtn_Click);
             // 
             // RunDynamicsBtn
             // 
+            this.RunDynamicsBtn.BackColor = System.Drawing.Color.White;
             this.RunDynamicsBtn.Enabled = false;
-            this.RunDynamicsBtn.Location = new System.Drawing.Point(12, 110);
+            this.RunDynamicsBtn.Location = new System.Drawing.Point(13, 251);
+            this.RunDynamicsBtn.Margin = new System.Windows.Forms.Padding(4);
             this.RunDynamicsBtn.Name = "RunDynamicsBtn";
-            this.RunDynamicsBtn.Size = new System.Drawing.Size(312, 23);
+            this.RunDynamicsBtn.Size = new System.Drawing.Size(428, 40);
             this.RunDynamicsBtn.TabIndex = 2;
-            this.RunDynamicsBtn.Text = "Run Dynamics";
-            this.RunDynamicsBtn.UseVisualStyleBackColor = true;
+            this.RunDynamicsBtn.Text = "Find Character";
+            this.RunDynamicsBtn.UseVisualStyleBackColor = false;
             this.RunDynamicsBtn.Click += new System.EventHandler(this.RunDynamicsBtn_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.lblEnergy);
-            this.groupBox1.Controls.Add(this.lblNumberOfPatterns);
-            this.groupBox1.Controls.Add(this.lblNNSize);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 151);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(312, 96);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Properties of Neural Network";
-            // 
-            // lblEnergy
-            // 
-            this.lblEnergy.AutoSize = true;
-            this.lblEnergy.Location = new System.Drawing.Point(139, 67);
-            this.lblEnergy.Name = "lblEnergy";
-            this.lblEnergy.Size = new System.Drawing.Size(13, 13);
-            this.lblEnergy.TabIndex = 5;
-            this.lblEnergy.Text = "0";
-            // 
-            // lblNumberOfPatterns
-            // 
-            this.lblNumberOfPatterns.AutoSize = true;
-            this.lblNumberOfPatterns.Location = new System.Drawing.Point(139, 44);
-            this.lblNumberOfPatterns.Name = "lblNumberOfPatterns";
-            this.lblNumberOfPatterns.Size = new System.Drawing.Size(13, 13);
-            this.lblNumberOfPatterns.TabIndex = 4;
-            this.lblNumberOfPatterns.Text = "0";
-            // 
-            // lblNNSize
-            // 
-            this.lblNNSize.AutoSize = true;
-            this.lblNNSize.Location = new System.Drawing.Point(139, 22);
-            this.lblNNSize.Name = "lblNNSize";
-            this.lblNNSize.Size = new System.Drawing.Size(13, 13);
-            this.lblNNSize.TabIndex = 3;
-            this.lblNNSize.Text = "0";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 67);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(122, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Current Value of Energy:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Number of Patterns:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Size of Neural Network:";
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.White;
             this.groupBox2.Controls.Add(this.currentState);
-            this.groupBox2.Location = new System.Drawing.Point(223, 262);
+            this.groupBox2.Location = new System.Drawing.Point(294, 332);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(171, 185);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(228, 228);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Current State";
             // 
             // currentState
             // 
+            this.currentState.BackColor = System.Drawing.Color.White;
             this.currentState.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.currentState.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.currentState.Location = new System.Drawing.Point(3, 16);
+            this.currentState.Location = new System.Drawing.Point(4, 19);
+            this.currentState.Margin = new System.Windows.Forms.Padding(4);
             this.currentState.Name = "currentState";
-            this.currentState.Size = new System.Drawing.Size(165, 166);
+            this.currentState.Size = new System.Drawing.Size(220, 205);
             this.currentState.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.currentState.TabIndex = 0;
             this.currentState.TabStop = false;
@@ -182,50 +114,60 @@
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox3.Controls.Add(this.StoredImgPanel);
-            this.groupBox3.Location = new System.Drawing.Point(378, 23);
+            this.groupBox3.Location = new System.Drawing.Point(501, 38);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(197, 224);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(263, 276);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Patterns in the Neural Network";
+            this.groupBox3.Text = "Characters Saved";
             // 
             // StoredImgPanel
             // 
             this.StoredImgPanel.AutoScroll = true;
             this.StoredImgPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StoredImgPanel.Location = new System.Drawing.Point(3, 16);
+            this.StoredImgPanel.Location = new System.Drawing.Point(4, 19);
+            this.StoredImgPanel.Margin = new System.Windows.Forms.Padding(4);
             this.StoredImgPanel.Name = "StoredImgPanel";
-            this.StoredImgPanel.Padding = new System.Windows.Forms.Padding(30, 3, 30, 3);
-            this.StoredImgPanel.Size = new System.Drawing.Size(191, 205);
+            this.StoredImgPanel.Padding = new System.Windows.Forms.Padding(40, 4, 40, 4);
+            this.StoredImgPanel.Size = new System.Drawing.Size(255, 253);
             this.StoredImgPanel.TabIndex = 0;
             // 
             // SelectPictureBtn
             // 
+            this.SelectPictureBtn.BackColor = System.Drawing.Color.White;
             this.SelectPictureBtn.Enabled = false;
-            this.SelectPictureBtn.Location = new System.Drawing.Point(12, 81);
+            this.SelectPictureBtn.Location = new System.Drawing.Point(13, 189);
+            this.SelectPictureBtn.Margin = new System.Windows.Forms.Padding(4);
             this.SelectPictureBtn.Name = "SelectPictureBtn";
-            this.SelectPictureBtn.Size = new System.Drawing.Size(312, 23);
+            this.SelectPictureBtn.Size = new System.Drawing.Size(428, 38);
             this.SelectPictureBtn.TabIndex = 6;
             this.SelectPictureBtn.Text = "Select Picture to Identify";
-            this.SelectPictureBtn.UseVisualStyleBackColor = true;
+            this.SelectPictureBtn.UseVisualStyleBackColor = false;
             this.SelectPictureBtn.Click += new System.EventHandler(this.SelectPictureBtn_Click);
             // 
             // groupBox4
             // 
+            this.groupBox4.BackColor = System.Drawing.Color.White;
             this.groupBox4.Controls.Add(this.distortedImg);
-            this.groupBox4.Location = new System.Drawing.Point(12, 262);
+            this.groupBox4.Location = new System.Drawing.Point(13, 332);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(205, 185);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Size = new System.Drawing.Size(273, 228);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Picture to Identify";
             // 
             // distortedImg
             // 
+            this.distortedImg.BackColor = System.Drawing.Color.White;
             this.distortedImg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.distortedImg.Location = new System.Drawing.Point(3, 16);
+            this.distortedImg.Location = new System.Drawing.Point(4, 19);
+            this.distortedImg.Margin = new System.Windows.Forms.Padding(4);
             this.distortedImg.Name = "distortedImg";
-            this.distortedImg.Size = new System.Drawing.Size(199, 166);
+            this.distortedImg.Size = new System.Drawing.Size(265, 205);
             this.distortedImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.distortedImg.TabIndex = 0;
             this.distortedImg.TabStop = false;
@@ -237,70 +179,82 @@
             // 
             // nearPat
             // 
-            this.nearPat.Location = new System.Drawing.Point(25, 41);
+            this.nearPat.Location = new System.Drawing.Point(33, 50);
+            this.nearPat.Margin = new System.Windows.Forms.Padding(4);
             this.nearPat.Name = "nearPat";
-            this.nearPat.Size = new System.Drawing.Size(150, 163);
+            this.nearPat.Size = new System.Drawing.Size(200, 201);
             this.nearPat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.nearPat.TabIndex = 7;
             this.nearPat.TabStop = false;
             // 
             // groupBox5
             // 
+            this.groupBox5.BackColor = System.Drawing.Color.White;
             this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Controls.Add(this.nearPat);
-            this.groupBox5.Location = new System.Drawing.Point(400, 262);
+            this.groupBox5.Location = new System.Drawing.Point(530, 332);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(202, 210);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox5.Size = new System.Drawing.Size(269, 258);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Nearest Pattern";
+            this.groupBox5.Text = "Nearest Character";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 19);
+            this.label4.Location = new System.Drawing.Point(9, 23);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.Size = new System.Drawing.Size(0, 17);
             this.label4.TabIndex = 8;
             // 
             // AddKorean
             // 
+            this.AddKorean.BackColor = System.Drawing.Color.White;
             this.AddKorean.Enabled = false;
-            this.AddKorean.Location = new System.Drawing.Point(229, 52);
+            this.AddKorean.Location = new System.Drawing.Point(315, 108);
+            this.AddKorean.Margin = new System.Windows.Forms.Padding(4);
             this.AddKorean.Name = "AddKorean";
-            this.AddKorean.Size = new System.Drawing.Size(95, 23);
+            this.AddKorean.Size = new System.Drawing.Size(126, 56);
             this.AddKorean.TabIndex = 9;
             this.AddKorean.Text = "Add Korean";
-            this.AddKorean.UseVisualStyleBackColor = true;
+            this.AddKorean.UseVisualStyleBackColor = false;
             this.AddKorean.Click += new System.EventHandler(this.AddKorean_Click);
             // 
             // AddJapanese
             // 
+            this.AddJapanese.BackColor = System.Drawing.Color.White;
             this.AddJapanese.Enabled = false;
-            this.AddJapanese.Location = new System.Drawing.Point(119, 52);
+            this.AddJapanese.Location = new System.Drawing.Point(170, 108);
+            this.AddJapanese.Margin = new System.Windows.Forms.Padding(4);
             this.AddJapanese.Name = "AddJapanese";
-            this.AddJapanese.Size = new System.Drawing.Size(98, 23);
+            this.AddJapanese.Size = new System.Drawing.Size(137, 56);
             this.AddJapanese.TabIndex = 10;
             this.AddJapanese.Text = "Add Japanese";
-            this.AddJapanese.UseVisualStyleBackColor = true;
+            this.AddJapanese.UseVisualStyleBackColor = false;
             this.AddJapanese.Click += new System.EventHandler(this.AddJapanese_Click);
             // 
             // AddChinese
             // 
+            this.AddChinese.BackColor = System.Drawing.Color.White;
             this.AddChinese.Enabled = false;
-            this.AddChinese.Location = new System.Drawing.Point(12, 52);
+            this.AddChinese.Location = new System.Drawing.Point(13, 108);
+            this.AddChinese.Margin = new System.Windows.Forms.Padding(4);
             this.AddChinese.Name = "AddChinese";
-            this.AddChinese.Size = new System.Drawing.Size(98, 23);
+            this.AddChinese.Size = new System.Drawing.Size(149, 56);
             this.AddChinese.TabIndex = 11;
             this.AddChinese.Text = "Add Chinese";
-            this.AddChinese.UseVisualStyleBackColor = true;
+            this.AddChinese.UseVisualStyleBackColor = false;
             this.AddChinese.Click += new System.EventHandler(this.AddChinese_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(614, 599);
+            this.BackColor = System.Drawing.Color.Maroon;
+            this.ClientSize = new System.Drawing.Size(819, 614);
             this.Controls.Add(this.AddChinese);
             this.Controls.Add(this.AddJapanese);
             this.Controls.Add(this.AddKorean);
@@ -309,13 +263,11 @@
             this.Controls.Add(this.SelectPictureBtn);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.RunDynamicsBtn);
             this.Controls.Add(this.CreateNNBtn);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "East Asian Character Recognizer";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.currentState)).EndInit();
             this.groupBox3.ResumeLayout(false);
@@ -332,14 +284,7 @@
 
         private System.Windows.Forms.Button CreateNNBtn;
         private System.Windows.Forms.Button RunDynamicsBtn;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblEnergy;
-        private System.Windows.Forms.Label lblNumberOfPatterns;
-        private System.Windows.Forms.Label lblNNSize;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.PictureBox currentState;
         private System.Windows.Forms.GroupBox groupBox3;
